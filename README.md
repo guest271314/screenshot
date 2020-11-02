@@ -29,11 +29,7 @@
 
 Tested at Firefox 82, Nightly 84, Chromium 88.
 
-<h5>Note</h5> 
-
-At Chromium a five (5) second delay for time to hide screen capture notification window is implemented before the `MediaStream` from `getDisplayMedia()` is passed to `MediaRecorder` to avoid capturing the notification in screenshots.
-
-TODO: Programmatically hide Chromium screen capture notification.
+TODO: Programmatically hide screen capture notification.
 
 <h5>References</h5>
 
