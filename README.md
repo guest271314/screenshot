@@ -1,5 +1,5 @@
 # screenshot
-`getDisplayMedia()` => `MediaRecorder()` => [VP8 - WebM JavaScript Decoder](https://github.com/dominikhlbg/vp8-webm-javascript-decoder) => `ImageData`
+`getDisplayMedia()` => `HTMLVideoElement` => `ImageBitmap`
 
 <h4>Usage</h4>
 
