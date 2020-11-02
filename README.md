@@ -27,8 +27,6 @@
 });
 ```
 
-Utilizes of a modified version of .
-
 <h5>Note</h5> 
 
 At Chromium a five (5) second delay for time to hide screen capture notification window is implemented before the `MediaStream` from `getDisplayMedia()` is passed to `MediaRecorder` to avoid capturing the notification in screenshots.
