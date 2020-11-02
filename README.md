@@ -6,7 +6,7 @@
 ```
 (async _ => {
   try {
-    const screenshots = await screenshot()
+    const screenshots = await screenshot();
     for (const screenshot of screenshots) {
       // do stuff with ImageData
       console.log(screenshot);
