@@ -11,7 +11,7 @@
       // do stuff with ImageData
       console.log(screenshot);
       const canvas = document.createElement('canvas');
-      const ctx = c.getContext('2d');
+      const ctx = canvas.getContext('2d');
       canvas.width = screenshot.width;
       canvas.height = screenshot.height;
       ctx.putImageData(screenshot, 0, 0);
