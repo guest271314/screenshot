@@ -9124,10 +9124,6 @@ async function screenshot() {
   const stream = await navigator.mediaDevices.getDisplayMedia({
     video: true,
   });
-  // five (5) seconds to hide Chromium screen capture notification
-  if (navigator.userAgent.includes('Chrome')) {
-    await new Promise((_) => setTimeout(_, 5000));
-  }
   const [track] = stream.getVideoTracks();
   await track.applyConstraints({
     frameRate: {
