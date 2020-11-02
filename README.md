@@ -4,32 +4,25 @@
 <h4>Usage</h4>
 
 ```
-(async _ => {
+onclick = async e => {
+  onclick = null;
   try {
-    const screenshots = await screenshot();
-    for (const screenshot of screenshots) {
-      // do stuff with ImageData
-      console.log(screenshot);
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = screenshot.width;
-      canvas.height = screenshot.height;
-      ctx.putImageData(screenshot, 0, 0);
-      document.body.appendChild(canvas);
-    }  
+    const bitmap = await screenshot();
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('bitmaprenderer');
+    canvas.width = bitmap.width;
+    canvas.height = bitmap.height;
+    ctx.transferFromImageBitmap(bitmap);
+    document.body.appendChild(canvas);
   } catch(e) {
-      throw e;
+      console.error(e);
+      console.trace();
   }
-})()
-.catch(e => {
-  console.error(e);
-  console.trace();
-});
+}
+
 ```
 
 Tested at Firefox 82, Nightly 84, Chromium 88.
-
-TODO: Programmatically hide screen capture notification.
 
 <h5>References</h5>
 
