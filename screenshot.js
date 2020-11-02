@@ -12,10 +12,10 @@ async function screenshot() {
       video.onplay = async (e) => {
 	// wait for prompt to fade out
         await new Promise((_) => setTimeout(_, 1000));
+	resolve(createImageBitmap(video));
         track.stop();
         video.load();
         video.srcObject = null;
-	resolve(createImageBitmap(video));
       };
       video.srcObject = stream;
     });
