@@ -1,24 +1,23 @@
-// screenshot.js guest271314 10-31-2020
-// getDisplayMedia() => HTMLVideoElement => ImageBitmap
+// screenshot.js guest271314 11-23-2023
+// getDisplayMedia() => MediaStreamTrackProcessor => ImageBitmap => OffscreenCanvas
 async function screenshot() {
   try {
     const stream = await navigator.mediaDevices.getDisplayMedia({
-      video: true,
+      preferCurrentTab: true
     });
     const [track] = stream.getVideoTracks();
-    const video = document.createElement('video');
-    video.autoplay = video.muted = true;
-    return new Promise((resolve) => {
-      video.onplay = async (e) => {
-	// wait for prompt to fade out
-        await new Promise((_) => setTimeout(_, 1000));
-	resolve(createImageBitmap(video));
-        track.stop();
-        video.load();
-        video.srcObject = null;
-      };
-      video.srcObject = stream;
+    const processor = new MediaStreamTrackProcessor({
+      track
     });
+    const {
+      value: videoFrame
+    } = await processor.readable.getReader().read();
+    track.stop();
+    const image = await createImageBitmap(videoFrame);
+    const osctx = (new OffscreenCanvas(image.width, image.height)).getContext("bitmaprenderer");
+    osctx.transferFromImageBitmap(image);
+    videoFrame.close();
+    return URL.createObjectURL(await osctx.canvas.convertToBlob());
   } catch (e) {
     throw e;
   }
